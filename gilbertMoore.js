@@ -38,27 +38,6 @@ function gilbertMoore(text, symbols) {
         probabilities[i] = getSymbolCount(text, symbols[i]) / text.length;
     }
 
-    // можно и без сортировки
-    // начало блока сортировки
-    const split = symbols.split('');
-
-    for (let i = 0; i < probabilities.length - 1; i++) {
-        for (let j = 0; j < probabilities.length - i - 1; j++) {
-            if (probabilities[j] < probabilities[j + 1]) {
-                let temp = probabilities[j];
-                probabilities[j] = probabilities[j + 1];
-                probabilities[j + 1] = temp;
-
-                temp = split[j];
-                split[j] = split[j + 1];
-                split[j + 1] = temp;
-            }
-        }
-    }
-
-    symbols = split.join('');
-    // конец блока сортировки
-
     for (let i = 0; i < probabilities.length; i++) {
         Q[i] = pr + probabilities[i] / 2;
         pr += probabilities[i];
